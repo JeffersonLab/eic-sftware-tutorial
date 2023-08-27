@@ -112,7 +112,10 @@ module load singularity/3.10.0
 > - [EIC Tutorial: Setting Up Your Environment](https://eic.github.io/tutorial-setting-up-environment/index.html)
 > - [`eic-shell` video tutorial](https://www.youtube.com/watch?v=Y0Mg24XLomY)
 
-# 2 Convert MCEG to HepMC3
+
+<br/>
+
+## 2 Convert MCEG to HepMC3
 
 Simulation software strictly accepts only HepMC3 as an input format. (though HepMC2 should work too)
 
@@ -145,7 +148,9 @@ Currently there are 2 packages that allow to convert different MCEG to HepMC
     mcconv /work/eic/mc/meson_MC/OUTPUTS/0mrad_IR0/nov_2021/pi_n_10.0on100.0_x0.0010-1.0000_q1.0-100.0_lund.dat -v -p 1000
 ```
 
-# 3 Crossing angle and beam effects
+<br/>
+
+## 3 Crossing angle and beam effects
 
 
 In order to apply crossing and beam effects to existing HepMC files [EIC Afterbur](https://github.com/eic/afterburner)
@@ -170,11 +175,11 @@ abconv -o out_name_no_ext input_file.hepmc
 
 Use `abconv --help` or follow the [instruction of how to use the afterburner](https://github.com/eic/afterburner). 
 
+<br/>
 
+## 4 DD4HEP Simulation
 
-# 4 DD4HEP Simulation
-
-## Pythia and other EG
+### Pythia and other EG
 
 ```bash
 # Detectors live in
@@ -189,7 +194,7 @@ source /opt/detector/setup.sh
 ddsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles mceg.hepmc
 ```
 
-## Particle gun
+### Particle gun
 
 There are at least 2 ways of how to run a particle gun:
 
@@ -236,6 +241,8 @@ ddsim --runType run --compactFile=$DETECTOR_PATH/epic.xml --enableG4GPS --macro 
 
 [EICrecon documentation](http://eicrecon.epic-eic.org/#/)
 
+
+### Advanced flags
 
 Here is an advanced example of running eicrecon with common flags with explanation
 
@@ -318,7 +325,7 @@ export DETECTOR="epic_tracking_only"
 /home/romanov/work/data/eicrecon_test/output.edm4hep.root
 ```
 
-## 6 Reconstruction development
+### Reconstruction development
 
 Once inside the `eic-shell` you should source the geometry setup script since this is not done by default. Then, clone the `EICrecon` repository and build it:
 
