@@ -1,7 +1,7 @@
 
 > **Warning**
 >
-> This is an unofficial documentation. An experiment to create easy documentation on EIC EPIC software for JLab users. It is not recommended unless it was recommended to you. Check dates if it is outdated or not. 
+> This is an unofficial documentation. An experiment to create easy TL;DR; documentation on EIC EPIC software for JLab users. Use it on your own risk. Check dates if it is outdated or not. 
 
 # Run simulation and reconstruction 
 
@@ -179,6 +179,10 @@ Use `abconv --help` or follow the [instruction of how to use the afterburner](ht
 
 ## 4 DD4HEP Simulation
 
+***ddsim vs npsim*** - DD4Hep uses ddsim command to process simulations. EIC has its own wrapper called `npsim` which is essentially `ddsim` but with the EIC physics list, optical photons enabled for certain detector and other properties like this.
+
+[npsim script](https://github.com/eic/npsim/blob/main/src/dd4pod/python/npsim.py)
+
 ### Pythia and other EG
 
 ```bash
@@ -191,7 +195,7 @@ Use `abconv --help` or follow the [instruction of how to use the afterburner](ht
 source /opt/detector/setup.sh
 
 # Run simulation for 1000 events
-ddsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles mceg.hepmc
+npsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles mceg.hepmc
 ```
 
 ### Particle gun
@@ -211,16 +215,16 @@ Using ddsim (wrapper around ddsim) command line:
 source /opt/detector/setup.sh
 
 # Electrons with 1MeV - 30GeV fired in all directions, 1000 events
-ddsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --random.seed 1 --enableGun --gun.particle="e-" --gun.momentumMin 1*MeV --gun.momentumMax 30*GeV --gun.distribution uniform --outputFile gun_sim.edm4hep.root
+npsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --random.seed 1 --enableGun --gun.particle="e-" --gun.momentumMin 1*MeV --gun.momentumMax 30*GeV --gun.distribution uniform --outputFile gun_sim.edm4hep.root
 
 # Pions from defined position and direction
-ddsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --enableGun --gun.particle="pi-" --gun.position "0.0 0.0 1.0*cm" --gun.direction "1.0 0.0 1.0" --gun.energy 100*GeV --outputFile=test_gun.root
+npsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --enableGun --gun.particle="pi-" --gun.position "0.0 0.0 1.0*cm" --gun.direction "1.0 0.0 1.0" --gun.energy 100*GeV --outputFile=test_gun.edm4hep.root
 
 # uniform spread inside an angle:
-ddsim --compactFile=$DETECTOR_PATH/epic.xml -N=2 --random.seed 1 --enableGun --gun.energy 2*GeV --gun.thetaMin 0*deg --gun.thetaMax 90*deg --gun.distribution uniform --outputFile test.root
+npsim --compactFile=$DETECTOR_PATH/epic.xml -N=2 --random.seed 1 --enableGun --gun.energy 2*GeV --gun.thetaMin 0*deg --gun.thetaMax 90*deg --gun.distribution uniform --outputFile test.edm4hep.root
 
 # run to see all particle gun options
-ddsim --help
+npsim --help
 ```
 
 ### Using Geant4 macros GPS
@@ -234,7 +238,7 @@ To run ddsim with GPS you have to add [\--enableG4GPS]{.title-ref} flag
 and specify Geant4 macro file:
 
 ```bash
-ddsim --runType run --compactFile=$DETECTOR_PATH/epic.xml --enableG4GPS --macro $DETECTOR_PATH/macro/gps.mac --outputFile gps_example.root
+npsim --runType run --compactFile=$DETECTOR_PATH/epic.xml --enableG4GPS --macro $DETECTOR_PATH/macro/gps.mac --outputFile gps_example.root
 ```
 
 ## 5 Run reconstruction
