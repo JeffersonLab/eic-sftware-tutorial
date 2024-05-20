@@ -76,6 +76,8 @@ version numbers. This requires either singularity or docker to be installed
 on your local machine. Below are some quick start instructions for using
 Singularity.
 
+Singularity is installed on JLab CUE but for local machines [use the instruction in the end of this document](#How-to-install-Singularity)
+
 **Quick start for eic-shell**
 
 ```bash
@@ -377,5 +379,36 @@ Example:
 
 At this point, you can [create your own user plugin](/howto/make_plugin.md) or
 [add a new factory (i.e. algorithm)](/howto/add_factory.md).
+
+
+## How to install Singularity
+
+The [official Singularity installation instructions](https://docs.sylabs.io/guides/4.1/user-guide/quick_start.html) is cumbersome The [official Singularity installation instructions](https://docs.sylabs.io/guides/4.1/user-guide/quick_start.html) is cumbersome 
+and an average user might seek simpler alternatives. As of 2024, there is no singularity-container package in the default package
+lists of Linux distributions, which means you cannot simply run apt install singularity-container. 
+Additionally, be aware of a game also named Singularity that IS actually sits in linux distros PMs - to avoid confusion. 
+
+**The easiest way to install the singularity-container is by directly downloading the package from their GitHub releases**:
+
+https://github.com/sylabs/singularity/releases
+
+For Debian-based systems, you can install it like this:
+
+```bash
+sudo apt-get install ./singularity-ce_4.1.3-jammy_amd64.deb
+```
+
+It's important to specify "./" so it understands that it refers to a local file.
+
+For RPM-based systems, you can find the corresponding RPM package and use rpm, dnf or yum to install it. For example:
+
+```bash
+sudo dnf install ./singularity-ce_4.1.3.el8.x86_64.rpm
+```
+This command also uses "./" to indicate that the package is locally stored.
+
+Alternatively, for Debian Sid users, the package can be downloaded from:
+
+https://packages.debian.org/sid/amd64/singularity-container/download
 
 
