@@ -51,10 +51,10 @@ abconv headon.hepmc -o sim_input
 # Detectors live in
 # /opt/detectors
 # one can select particular configuration as
-# source /opt/detector/epic-22.10.0/setup.sh
+# source /opt/detector/epic-xxx/bin/thisepic.sh
 #
 # or one can set the default detector (now points to epic-nightly)
-source /opt/detector/setup.sh
+source /opt/detector/epic-main/bin/thisepic.sh
 
 # Run simulation for 1000 events
 # (!) Using *.edm4hep.root in the output is mandatory
@@ -74,7 +74,7 @@ curated selection of software components. It is the recommended way to use
 `eicrecon` as it already has all of the dependencies compiled with matching
 version numbers. This requires either singularity or docker to be installed
 on your local machine. Below are some quick start instructions for using
-Singularity.
+Singularity. Docker/podman containers also could be used. 
 
 Singularity is installed on JLab CUE but for local machines [use the instruction in the end of this document](#How-to-install-Singularity)
 
@@ -87,9 +87,12 @@ cd ~/eic
 curl --location https://get.epic-eic.org | bash
 ./eic-shell
 
-# or, if /cvmfs is available:
+# or, if /cvmfs is available (on ifarm):
 
-singularity exec /cvmfs/singularity.opensciencegrid.org/eicweb/jug_xl:nightly eic-shell
+singularity exec /cvmfs/singularity.opensciencegrid.org/eicweb/eic_xl:nightly eic-shell
+
+#or if docker or podman are available
+docker run --rm -it -v <host/data/dir>:/mnt/data eicweb/eic_xl:nightly eic-shell
 ```
 
 If you run it on the JLab CUE you should first enable singularity like 
@@ -191,10 +194,10 @@ Use `abconv --help` or follow the [instruction of how to use the afterburner](ht
 # Detectors live in
 # /opt/detectors
 # one can select particular configuration as
-# source /opt/detector/epic-22.10.0/setup.sh
+# source /opt/detector/epic-xxx/bin/thisepic.sh
 #
 # or one can set the default detector (now points to epic-nightly)
-source /opt/detector/setup.sh
+source /opt/detector/epic-main/bin/thisepic.sh
 
 # Run simulation for 1000 events
 npsim --compactFile=$DETECTOR_PATH/epic.xml -N=1000 --outputFile=sim_output.edm4hep.root --inputFiles mceg.hepmc
