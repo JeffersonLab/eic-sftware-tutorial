@@ -251,6 +251,14 @@ npsim --runType run --compactFile=$DETECTOR_PATH/epic.xml --enableG4GPS --macro 
 [EICrecon documentation](http://eicrecon.epic-eic.org/#/)
 
 
+```bash
+eicrecon -Pjana:debug_plugin_loading=1 -Pjana:nevents=100 -Pjana:timeout=0\
+ -Ppodio:output_file=dirc_optical.edm4hep.root\
+ -Pdd4hep:xml_files=$DETECTOR_PATH/epic_dirc_only.xml\
+ dirc_optical_all.edm4hep.root  
+```
+
+
 ### Advanced flags
 
 Here is an advanced example of running eicrecon with common flags with explanation
